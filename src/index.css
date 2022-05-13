@@ -28,7 +28,9 @@ code {
 }
 .container{
   align-items: center;
-
 }
 
+.itable{
+  width: 100%;
+}
 
