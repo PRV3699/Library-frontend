@@ -58,3 +58,26 @@ export const createBook=async (title,author,description,quantity)=>{
     }
     return response
 }
+
+export const updateBook=async (title,author,description,quantity,id)=>{
+    const url=settings.server+`/book/${id}`
+    const token=sessionStorage['token']
+    let response
+    try{
+        response=await axios.put(url,{
+            title,
+            author,
+            description,
+            quantity
+        },{
+            headers:{
+                Authorization:`Bearer ${token}`,
+            }
+        })
+        response=response.data
+
+    }catch(ex){
+        console.log(ex)
+    }
+    return response
+}

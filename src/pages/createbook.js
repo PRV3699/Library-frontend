@@ -23,7 +23,7 @@ const CreateBookPage = (props) => {
     } else {
       const result = await createBook(title, author, description, quantity)
       if (result) {
-        navigate('/dashboard')
+        navigate('/book-list')
       } else {
         alert('You are not admin')
       }
@@ -32,7 +32,7 @@ const CreateBookPage = (props) => {
 
   return (
     <div>
-      <h1 className="header">Create Book</h1>
+      <h1 className="header">Entry Book</h1>
       <div className="form">
         <div className="mb-3">
           <label className="form-label">Title</label>

@@ -28,10 +28,10 @@ const BookListPage =(props)=>{
             alert('You are not an admin');
         }
     }
-    // const UpdatebookPage = async (id) => {
-        
-
-    // }
+    const UpdatebookPage = async (id) => {
+        sessionStorage['bid']=id
+        navigate('/update-book')
+    }
    
     const logout=()=>{
         sessionStorage.removeItem('token')
@@ -69,7 +69,7 @@ const BookListPage =(props)=>{
                                      <td>{description}</td>
                                      <td>{quantity}</td>
                                      <td><button onClick={()=>onDeleteBook(id)} className="btn btn-success">delete</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     <button className="btn btn-success">update</button></td>
+                                     <button onClick={()=>UpdatebookPage(id)} className="btn btn-success">update</button></td>
                                      </tr>
                                      )
                                      })}
