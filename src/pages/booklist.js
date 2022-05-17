@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { getBooks } from "../services/book";
 import { deleteBook } from "../services/book";
 import{ createBook } from "../services/book";
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 import {DropdownButton,Dropdown} from 'react-bootstrap'
+import { updateBook } from '../services/book'
 const BookListPage =(props)=>{
     const [books, setBooks] = useState([])
     const navigate=useNavigate()
@@ -29,8 +30,99 @@ const BookListPage =(props)=>{
         }
     }
     const UpdatebookPage = async (id) => {
-        sessionStorage['bid']=id
-        navigate('/update-book')
+       
+        const [title, setTitle] = useState('')
+        const [author, setAuthor] = useState('')
+        const [description, setDescription] = useState('')
+        const [quantity, setQuantity]= useState(0)
+        
+        const navigate = useNavigate()
+
+        const onUpdateBook = async () => {
+            if (title.length === 0) {
+            alert('set title')
+            } else if (author.length === 0) {
+            alert('set category')
+            } else if (description.length === 0) {
+                alert('set category')
+            } else if (quantity.length === 0) {
+                alert('set quantity')
+            } else {
+            const result = await updateBook(title, author, description, quantity,id)
+            if (result) {
+                navigate('/book-list')
+            } else {
+                alert('You are not admin')
+            }
+            }
+        }
+
+        return (
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Update</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div className="form">
+                    <div className="mb-3">
+                    <label className="form-label">Title</label>
+                    <input
+                        onChange={(e) => {
+                        setTitle(e.target.value)
+                        }}
+                        type="text"
+                        className="form-control"
+                    />{' '}
+                    </div>
+
+                    <div className="mb-3">
+                    <label className="form-label">Author</label>
+                    <input
+                        onChange={(e) => {
+                        setAuthor(e.target.value)
+                        }}
+                        type="text"
+                        className="form-control"
+                    />{' '}
+                    </div>
+
+                    <div className="mb-3">
+                    <label className="form-label">Description</label>
+                    <input
+                        onChange={(e) => {
+                        setDescription(e.target.value)
+                        }}
+                        type="text"
+                        className="form-control"
+                    />{' '}
+                    </div>
+
+                    <div className="mb-3">
+                    <label className="form-label">Quantity</label>
+                    <input
+                        onChange={(e) => {
+                        setQuantity(e.target.value)
+                        }}
+                        type="number"
+                        className="form-control"
+                    />
+                    </div> 
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Update
+                        </button>
+                </div>
+                </div>
+            </div>
+            </div>
+        )
+      
     }
    
     const logout=()=>{
@@ -48,7 +140,7 @@ const BookListPage =(props)=>{
         </DropdownButton>
          <div className='book-table'>
          <table className="table table-success table-striped">
-             <table className="itable" style={{border:'2px solid'}}>
+             
                  <thead>
                      <tr style={{border:'1px solid'}}>
                          <th>Title</th>
@@ -74,7 +166,6 @@ const BookListPage =(props)=>{
                                      )
                                      })}
                             </tbody>
-            </table>
             </table>
         </div>
         </div>

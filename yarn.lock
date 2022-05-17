@@ -7353,6 +7353,11 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
+react-autofill@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-autofill/-/react-autofill-1.1.4.tgz#37e726c1339fdc4d47977da4ae708afe2b78dde0"
+  integrity sha1-N+cmwTOf3E1Hl32krnCK/it43eA=
+
 react-bootstrap@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-2.3.1.tgz#f14239efb89ca24044766e20cc829b7a264db11d"
