@@ -17,3 +17,67 @@ export const getBooks = async () => {
     }
     return response
 }
+export const deleteBook = async(id) => {
+    const url = settings.server + `/book/${id}`
+    const token = sessionStorage['token']
+    let response
+    try {
+        response = await axios.delete(url,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+        response = response.data
+    } catch (ex) {
+        console.log(ex)
+    }
+    return response
+}
+
+export const createBook=async (title,author,description,quantity)=>{
+    const url=settings.server+`/book/`
+    const token=sessionStorage['token']
+    let response
+    try{
+        response=await axios.post(url,{
+            title,
+            author,
+            description,
+            quantity
+        },{
+            headers:{
+                Authorization:`Bearer ${token}`,
+            }
+        })
+        response=response.data
+
+    }catch(ex){
+        console.log(ex)
+    }
+    return response
+}
+
+export const updateBook=async (title,author,description,quantity,id)=>{
+    const url=settings.server+`/book/${id}`
+    const token=sessionStorage['token']
+    let response
+    try{
+        response=await axios.put(url,{
+            title,
+            author,
+            description,
+            quantity
+        },{
+            headers:{
+                Authorization:`Bearer ${token}`,
+            }
+        })
+        response=response.data
+
+    }catch(ex){
+        console.log(ex)
+    }
+    return response
+}
